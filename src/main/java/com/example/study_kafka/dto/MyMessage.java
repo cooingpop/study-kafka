@@ -1,4 +1,4 @@
-package com.example.study_kafka;
+package com.example.study_kafka.dto;
 
 public class MyMessage {
     private String name;

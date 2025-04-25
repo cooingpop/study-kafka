@@ -1,15 +1,15 @@
-package com.example.study_kafka.service;
+package com.example.study_kafka.producer;
 
-import com.example.study_kafka.MyMessage;
+import com.example.study_kafka.dto.MyMessage;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KafkaProducerService {
+public class KafkaMessageProducer {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public KafkaProducerService(KafkaTemplate<String, Object> kafkaTemplate) {
+    public KafkaMessageProducer(KafkaTemplate<String, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 

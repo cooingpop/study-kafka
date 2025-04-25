@@ -7,6 +7,7 @@
 
 Kafka 설정이 포함된 `docker-compose.yml` 파일은 `resources` 디렉토리에 위치합니다.  
 Zookeeper 없이 Kafka 단독으로 실행되며, KRaft 모드 설정이 적용되어 있습니다.
+추가로, kafka-ui도 같이 설치되어, 이후 웹 브라우저에서 http://localhost:8989 으로 접속하여 kafka UI 사용 가능합니다.
 
 ---
 ## 2. Kafka 컨테이너 실행

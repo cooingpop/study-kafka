@@ -1,6 +1,7 @@
-package com.example.study_kafka;
+package com.example.study_kafka.controller;
 
-import com.example.study_kafka.service.KafkaProducerService;
+import com.example.study_kafka.dto.MyMessage;
+import com.example.study_kafka.producer.KafkaMessageProducer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/kafka")
 public class KafkaController {
 
-    private final KafkaProducerService producer;
+    private final KafkaMessageProducer producer;
 
-    public KafkaController(KafkaProducerService producer) {
+    public KafkaController(KafkaMessageProducer producer) {
         this.producer = producer;
     }
 
