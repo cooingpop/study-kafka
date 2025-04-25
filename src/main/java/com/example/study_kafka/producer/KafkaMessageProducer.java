@@ -1,10 +1,12 @@
 package com.example.study_kafka.producer;
 
-import com.example.study_kafka.dto.MyMessage;
+import com.example.study_kafka.model.MyMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Slf4j
+@Component
 public class KafkaMessageProducer {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
@@ -13,8 +15,8 @@ public class KafkaMessageProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendMessage(String topic, MyMessage message) {
+    public void send(String topic, MyMessage message) {
         kafkaTemplate.send(topic, message);
-        System.out.println("전송한 메시지: " + message.getName());
+        log.info("전송한 메시지: {}", message.getName());
     }
 }
