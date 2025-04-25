@@ -15,6 +15,6 @@ public class KafkaProducerService {
 
     public void sendMessage(String topic, MyMessage message) {
         kafkaTemplate.send(topic, message);
-        System.out.println("전송한 메시지: " + message.getName() + ", 나이: " + message.getAge());
+        System.out.println("전송한 메시지: " + message.getName());
     }
 }
