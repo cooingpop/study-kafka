@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: study-kafka
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    producer:
+      retries: 3
+      batch-size: 16384
+      linger-ms: 5
+      buffer-memory: 33554432
+      acks: all
+      compression-type: lz4
+      client-id: project-producer
+      enable-idempotence: true
+
+    consumer:
+      group-id: my-group
+      auto-offset-reset: earliest
+      trusted-packages: "*"
+      retry:
+        delay-ms: 1000
+        max-attempts: 3
