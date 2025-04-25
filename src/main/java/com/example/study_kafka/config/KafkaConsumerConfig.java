@@ -1,5 +1,6 @@
 package com.example.study_kafka.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,7 @@ import org.springframework.util.backoff.FixedBackOff;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @EnableKafka
 @Configuration
 public class KafkaConsumerConfig {
@@ -80,7 +82,7 @@ public class KafkaConsumerConfig {
 
         // 실패 로그 출력용 리스너 등록
         errorHandler.setRetryListeners((record, ex, attempt) -> {
-            System.out.printf("메시지 처리 실패 (재시도 %d회차): %s%n", attempt, ex.getMessage());
+            log.error("메시지 처리 실패 (재시도 {}회차): {}", attempt, ex.getMessage());
         });
 
         factory.setCommonErrorHandler(errorHandler);

@@ -145,7 +145,7 @@ Spring Kafka Consumer 클래스에서 로그를 통해 메시지 수신 여부�
 ```java
 @KafkaListener(topics = "my-topic", groupId = "json-group", containerFactory = "kafkaListenerContainerFactory")
 public void consume(MyMessage message) {
-    System.out.println("📥 수신한 메시지: " + message.getName();
+    System.out.println("수신한 메시지: " + message.getName();
 }
 ```
 
