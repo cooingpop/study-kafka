@@ -13,6 +13,6 @@ public class KafkaConsumerService {
             containerFactory = "kafkaListenerContainerFactory"
     )
     public void consume(MyMessage message) {
-        System.out.println("📥 수신한 메시지: " + message.getName());
+        System.out.println("수신한 메시지: " + message.getName());
     }
 }

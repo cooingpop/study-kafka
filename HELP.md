@@ -101,6 +101,88 @@ docker-compose down -v
 
 ---
 
+# 📡 Kafka API 호출 및 메시지 확인 방법
+
+Kafka 4.0 (KRaft 모드) 기반 Spring Kafka 예제에서 메시지를 API로 전송하고, 실제 Kafka에서 수신 확인하는 방법을 안내합니다.
+
+---
+
+## ✅ 1. Kafka 메시지 전송 API 호출
+
+Spring Boot 애플리케이션이 실행 중일 때 아래와 같은 방식으로 Kafka에 메시지를 전송할 수 있습니다.
+
+### 🔗 POST API
+
+- URL: `http://localhost:8080/kafka/send`
+- Method: `POST`
+- Content-Type: `application/json`
+
+### 📥 Request Body 예시
+
+```json
+{
+  "name": "홍길동"
+}
+```
+
+### 🧪 cURL 예시
+
+```bash
+curl -X POST http://localhost:8080/kafka/send \
+  -H "Content-Type: application/json" \
+  -d '{"name":"홍길동"}'
+```
+
+---
+
+## ✅ 2. 메시지 수신 확인 방법
+
+### 📌 방식 1: 서버 콘솔 로그 확인
+
+Spring Kafka Consumer 클래스에서 로그를 통해 메시지 수신 여부를 확인합니다.
+
+```java
+@KafkaListener(topics = "my-topic", groupId = "json-group", containerFactory = "kafkaListenerContainerFactory")
+public void consume(MyMessage message) {
+    System.out.println("📥 수신한 메시지: " + message.getName();
+}
+```
+
+- 기대 출력:
+  ```
+  수신한 메시지: 홍길동
+  ```
+
+---
+
+### 📌 방식 2: Kafka CLI 수동 확인 (선택)
+
+Kafka 컨테이너에 접속 후 수신된 메시지를 직접 확인할 수 있습니다:
+
+```bash
+docker exec -it kafka bash
+```
+
+```bash
+kafka-console-consumer --bootstrap-server localhost:9092 \
+  --topic my-topic \
+  --from-beginning
+```
+
+→ 전송된 메시지가 JSON 형태로 출력됩니다.
+
+---
+
+## 📝 참고
+
+- Kafka 컨테이너가 실행 중이어야 합니다 (`docker ps`)
+- Spring Boot 애플리케이션의 포트는 `8080` 기준입니다.
+- 토픽 이름과 설정 값(`my-topic`, `json-group`)이 일치해야 정상 수신됩니다.
+
+
+
+---
+
 ## 참고 사항
 
 - Kafka는 Zookeeper 없이 실행되며, 내부적으로 KRaft 메타데이터를 사용합니다.
